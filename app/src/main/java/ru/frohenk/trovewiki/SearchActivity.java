@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
@@ -26,7 +29,23 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_search);
+        {//ADS
+            //Locate the Banner Ad in activity_main.xml
+            AdView adView = (AdView) this.findViewById(R.id.adViewSearch);
+
+            // Request for Ads
+            AdRequest adRequest = new AdRequest.Builder()
+
+                    // Add a test device to show Test Ads
+                    //.addTestDevice("095ECA72D190115F3A321F9194714E24")//TODO Remove
+                    .build();
+
+            // Load ads into Banner Ads
+            adView.loadAd(adRequest);
+        }
         try {
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

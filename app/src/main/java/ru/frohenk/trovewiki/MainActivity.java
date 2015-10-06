@@ -1,5 +1,6 @@
 package ru.frohenk.trovewiki;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -17,6 +18,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                 mListView.setAdapter(new ArrayAdapter<TroveItem>(MainActivity.this, R.layout.drawer_list_item, troveItems));
                 mDrawerLayout.closeDrawer(mDrawerList);
+
             }
         });
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -68,7 +73,22 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<TroveItem> troveItems = getCategoryItems(navigationItem);
 
+        AdView adView = (AdView) ((LayoutInflater)MainActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.ad_on_main_page, null, false);
+        {//ADS
+            //Locate the Banner Ad in activity_main.xml
 
+            // Request for Ads
+            AdRequest adRequest = new AdRequest.Builder()
+
+                    // Add a test device to show Test Ads
+                    //.addTestDevice("095ECA72D190115F3A321F9194714E24")//TODO Remove
+                    .build();
+
+            // Load ads into Banner Ads
+            adView.loadAd(adRequest);
+        }
+        //mListView.addFooterView(footerView);
+        mListView.addHeaderView(adView);
         mListView.setAdapter(new ArrayAdapter<TroveItem>(this, R.layout.drawer_list_item, troveItems));
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

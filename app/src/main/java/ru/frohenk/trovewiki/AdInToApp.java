@@ -21,7 +21,7 @@ public class AdInToApp extends AppCompatActivity {
         setContentView(R.layout.activity_ad_in_to_app);
 
         // Load an ad into the AdMob banner view.
-        AdView adView = (AdView) findViewById(R.id.adView);
+        AdView adView = (AdView) findViewById(R.id.adViewSearch);
         AdRequest adRequest = new AdRequest.Builder()
                 .setRequestAgent("android_studio:ad_template").build();
         adView.loadAd(adRequest);

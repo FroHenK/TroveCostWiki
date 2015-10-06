@@ -6,6 +6,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 public class ShowItemActivity extends AppCompatActivity {
 
     private TroveItem troveItem;
@@ -16,7 +19,20 @@ public class ShowItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_item);
+        {//ADS
+            //Locate the Banner Ad in activity_main.xml
+            AdView adView = (AdView) this.findViewById(R.id.adViewShowItem);
 
+            // Request for Ads
+            AdRequest adRequest = new AdRequest.Builder()
+
+                    // Add a test device to show Test Ads
+                    //.addTestDevice("095ECA72D190115F3A321F9194714E24")//TODO Remove
+                    .build();
+
+            // Load ads into Banner Ads
+            adView.loadAd(adRequest);
+        }
         troveItem = (TroveItem) getIntent().getSerializableExtra("SHIT");
         try {
 
