@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(MainActivity.this, ShowItemActivity.class);
-                intent.putExtra("SHIT", showItems.get(position));
+                intent.putExtra("SHIT", showItems.get(position-mListView.getHeaderViewsCount()));
                 startActivity(intent);
             }
         });

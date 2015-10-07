@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 public class ShowItemActivity extends AppCompatActivity {
 
@@ -19,6 +21,8 @@ public class ShowItemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_item);
+        // Get tracker.
+        Tracker tracker = ((TroveApp) this.getApplication()).getTracker();
         {//ADS
             //Locate the Banner Ad in activity_main.xml
             AdView adView = (AdView) this.findViewById(R.id.adViewShowItem);
@@ -49,6 +53,13 @@ public class ShowItemActivity extends AppCompatActivity {
         itemCostText.setText(troveItem.cost);
         itemNameText.setText(troveItem.name);
 
+        tracker.setScreenName("items screen");
+
+        tracker.send(new HitBuilders.EventBuilder()
+                .setCategory("UX")
+                .setAction("viewed item")
+                .setLabel(troveItem.name)
+                .build());
 
     }
 

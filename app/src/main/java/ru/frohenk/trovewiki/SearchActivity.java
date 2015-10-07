@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 
@@ -69,8 +71,9 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 troveItems = new ArrayList<TroveItem>();
+                String text = v.getText().toString();
                 for (TroveItem troveItem : TroveItem.values()){
-                    String text = v.getText().toString();
+
                     if(troveItem.name.toLowerCase().contains(text.toLowerCase())){
                         troveItems.add(troveItem);
 
@@ -78,6 +81,15 @@ public class SearchActivity extends AppCompatActivity {
 
 
                 }
+
+                Tracker tracker = ((TroveApp) SearchActivity.this.getApplication()).getTracker();
+                tracker.setScreenName("search screen");
+
+                tracker.send(new HitBuilders.EventBuilder()
+                        .setCategory("UX")
+                        .setAction("searched item")
+                        .setLabel(text)
+                        .build());
                 listResults.setAdapter(new ArrayAdapter<TroveItem>(SearchActivity.this,R.layout.drawer_list_item, troveItems));
                 hideKeyboard();
                 return true;
