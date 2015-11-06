@@ -99,6 +99,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        try {
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
+
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+
+        }
+
     }
 
     boolean doubleBackToExitPressedOnce = false;
@@ -167,6 +177,9 @@ public class MainActivity extends AppCompatActivity {
                 //exit pressed
                 System.exit(0);
                 break;
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(mDrawerList);
+                return true;
             case R.id.action_calculate:
                 Toast.makeText(this, "Trade calculator SOON!", Toast.LENGTH_SHORT).show();
                 break;
