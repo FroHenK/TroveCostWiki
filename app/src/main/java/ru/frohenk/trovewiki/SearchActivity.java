@@ -41,8 +41,7 @@ public class SearchActivity extends AppCompatActivity {
             // Request for Ads
             AdRequest adRequest = new AdRequest.Builder()
 
-                    // Add a test device to show Test Ads
-                    //.addTestDevice("095ECA72D190115F3A321F9194714E24")//TODO Remove
+
                     .build();
 
             // Load ads into Banner Ads
